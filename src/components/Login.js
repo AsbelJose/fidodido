@@ -1,8 +1,9 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithRedirect } from 'firebase/auth';
 import React, { useState } from 'react'
 import { Button, Container, Stack, Form } from 'react-bootstrap'
 import { auth } from '../firebase';
 
+const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
   const [ needRegister, setNeedRegister] = useState(false);
@@ -17,7 +18,7 @@ const Login = () => {
     } else {
       signInWithEmailAndPassword(auth, email, password);
     }
-    
+
    };
 
   return (
@@ -43,7 +44,14 @@ const Login = () => {
           </Button>
         </Form>
 
-        <Button variant='primary' type='submit' style={{ width: '300px'}}>Acceder con Google</Button>
+        <Button 
+          variant='primary' 
+          type='submit' 
+          style={{ width: '300px'}}
+          onClick={()=> signInWithRedirect(auth,googleProvider)}
+          >
+          Acceder con Google
+        </Button>
         
         <Button 
           style={{ width: '300px'}}
