@@ -21,7 +21,7 @@ function App() {
    });
 
   return (
-    <>{ globalUser ? <Home /> : <Login />}</>
+    <>{ globalUser ? <Home emailUser = { globalUser.email }/> : <Login />}</>
   );
 }
 
