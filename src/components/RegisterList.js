@@ -12,7 +12,7 @@ const RegisterList = ({ arrayRegisters, emailUser, setArrayRegister }) => {
       );
       //actualizar db
       const docuRef = doc(db, `usuarios/${emailUser}`);
-      updateDoc(docuRef, {registers: [...newArrayRegisters]});
+      await updateDoc(docuRef, {registers: [...newArrayRegisters]});
       //actualizar state
       setArrayRegister(newArrayRegisters);
     } 
@@ -26,10 +26,12 @@ const RegisterList = ({ arrayRegisters, emailUser, setArrayRegister }) => {
               <Row>
                 <Col>{register.description}</Col>
                 <Col>
-                  <Button>Show Register</Button>
+                  <a href={register.url}>
+                    <Button variant='secondary'>Show Register</Button>
+                  </a>
                 </Col>
                 <Col>
-                  <Button onClick={()=> deleteRegister(register.id)}>Delete</Button>
+                  <Button variant='danger' onClick={()=> deleteRegister(register.id)}>Delete</Button>
                 </Col>
               </Row>
               <hr />
